@@ -1,18 +1,22 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { NavigationContainer, NavigationContainerRef, useNavigation } from "@react-navigation/native";
-import { createStackGuardNavigator } from "./navigators/StackGuardNavigator";
-import HomeScreen from "../screens/home/HomeScreen";
-import IRoutingService, { Routes } from '../../presentation/abstractions/IRoutingService';
-import { withDependencies } from "../shared/contexts/DIContext";
-import { moduleUITypes } from "../ModuleUI";
-import PostsScreen from "../screens/posts/PostsScreen";
-import AuthGuard from "./guards/AuthGuard";
+import React, {useEffect, useMemo, useRef} from 'react';
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from '@react-navigation/native';
+import {createStackGuardNavigator} from './navigators/StackGuardNavigator';
+import HomeScreen from '../screens/home/HomeScreen';
+import IRoutingService, {
+  Routes,
+} from '../../presentation/abstractions/IRoutingService';
+import {withDependencies} from '../shared/contexts/DIContext';
+import PostsScreen from '../screens/posts/PostsScreen';
+import moduleUITypes from "../moduleUITypes";
 
 type AppNavigatorProps = {
   routingService: IRoutingService;
 };
 
-const AppNavigator: React.FC<AppNavigatorProps> = (p) => {
+const AppNavigator: React.FC<AppNavigatorProps> = p => {
   const Stack = useMemo(() => createStackGuardNavigator(), []);
   const navigationRef = useRef<NavigationContainerRef>(null);
 
@@ -24,8 +28,8 @@ const AppNavigator: React.FC<AppNavigatorProps> = (p) => {
 
     return function cleanup() {
       p.routingService.detachNavigator();
-    }
-  })
+    };
+  });
 
   return (
     <NavigationContainer ref={navigationRef}>
@@ -33,19 +37,12 @@ const AppNavigator: React.FC<AppNavigatorProps> = (p) => {
         initialRouteName={Routes.Home}
         detachInactiveScreens={true}
         headerMode="none">
+        <Stack.Screen name={Routes.Home} component={HomeScreen} />
 
-        <Stack.Screen
-          name={Routes.Home}
-          component={HomeScreen} />
-
-        <Stack.Screen
-          name={Routes.Posts}
-          component={PostsScreen}
-        />
-
+        <Stack.Screen name={Routes.Posts} component={PostsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 };
 
 export default withDependencies(
@@ -53,5 +50,5 @@ export default withDependencies(
   c => ({
     routingService: c.get<IRoutingService>(moduleUITypes.routingService),
   }),
-  AppNavigator
+  AppNavigator,
 );

@@ -1,14 +1,14 @@
-import React from "react";
-import HomeViewModel from "../../../presentation/home/HomeViewModel";
-import { withDependencies } from "../../shared/contexts/DIContext";
-import { modulePresentationTypes } from "../../../presentation/ModulePresentation";
-import {default as Layout} from "./components/layout/LayoutComponent";
-import {default as Button} from "../../shared/components/button/ButtonComponent";
-import ScreenLayout from "../../shared/layouts/ScreenLayout";
-import { View } from "react-native";
+import React from 'react';
+import HomeViewModel from '../../../presentation/home/HomeViewModel';
+import {withDependencies} from '../../shared/contexts/DIContext';
+import {default as Layout} from './components/layout/LayoutComponent';
+import {default as Button} from '../../shared/components/button/ButtonComponent';
+import ScreenLayout from '../../shared/layouts/ScreenLayout';
+import {View} from 'react-native';
+import modulePresentationTypes from '../../../presentation/modulePresentationTypes';
 
 type HomeScreenProps = {
-  vm: HomeViewModel,
+  vm: HomeViewModel;
 };
 
 const HomeScreen: React.VFC<HomeScreenProps> = p => (
@@ -35,5 +35,5 @@ export default withDependencies(
   c => ({
     vm: c.get(modulePresentationTypes.HomeViewModel),
   }),
-  HomeScreen
+  HomeScreen,
 );
