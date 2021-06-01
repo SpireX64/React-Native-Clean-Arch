@@ -1,0 +1,14 @@
+com/cleanrn/ReactNativeFlipper.java
+ com.cleanrn.ReactNativeFlipper
+ com.cleanrn.ReactNativeFlipper$1
+ com.cleanrn.ReactNativeFlipper$2
+ com.cleanrn.ReactNativeFlipper$2$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/cleanrn/BuildConfig.java
+ com.cleanrn.BuildConfig
+com/cleanrn/MainActivity.java
+ com.cleanrn.MainActivity
+com/cleanrn/MainApplication.java
+ com.cleanrn.MainApplication
+ com.cleanrn.MainApplication$1

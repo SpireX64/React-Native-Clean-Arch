@@ -1,0 +1,3 @@
+rootProject.name = 'CleanRN'
+applyNativeModulesSettingsGradle(settings)
+include ':app'
