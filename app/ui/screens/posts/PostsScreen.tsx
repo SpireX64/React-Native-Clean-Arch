@@ -3,8 +3,9 @@ import PostsViewModel from '../../../presentation/posts/PostsViewModel';
 import {withDependencies} from '../../shared/contexts/DIContext';
 import {Text, View} from 'react-native';
 import {observer} from 'mobx-react-lite';
-import ScreenLayout from "../../shared/layouts/ScreenLayout";
-import modulePresentationTypes from "../../../presentation/modulePresentationTypes";
+import modulePresentationTypes from '../../../presentation/modulePresentationTypes';
+import {default as Layout} from './components/layout/LayoutComponent';
+import PostsListComponent from "./components/posts-list/PostsListComponent";
 
 type PostsScreenProps = {
   vm: PostsViewModel;
@@ -13,20 +14,15 @@ type PostsScreenProps = {
 const PostsScreen: React.VFC<PostsScreenProps> = p => {
   useEffect(() => {
     p.vm.preparePosts();
-  },[]);
+  }, []);
 
   return (
-    <ScreenLayout>
-      <View style={{flex: 1}}>
-        {p.vm.isLoading && <Text>Loading...</Text>}
-        {p.vm.posts.map(post => (
-          <View key={post.id} style={{backgroundColor: '#ccc', marginBottom: 2}}>
-            <Text>{post.title}</Text>
-            <Text>{post.body}</Text>
-          </View>
-        ))}
-      </View>
-    </ScreenLayout>
+    <Layout
+      title="Posts"
+      loading={p.vm.isLoading}
+      onBackPress={p.vm.goBack}>
+      <PostsListComponent data={p.vm.posts}/>
+    </Layout>
   );
 };
 

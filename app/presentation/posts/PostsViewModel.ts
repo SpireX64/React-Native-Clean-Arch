@@ -3,10 +3,13 @@ import IPostsInteractor from '../../domain/usecases/posts/IPostsInteractor';
 import {PostModel} from '../../domain/usecases/posts/models';
 import {action, makeObservable, observable, runInAction} from 'mobx';
 import moduleDomainTypes from '../../domain/moduleDomainTypes';
+import moduleUITypes from '../../ui/moduleUITypes';
+import IRoutingService from '../abstractions/IRoutingService';
 
 @injectable()
 export default class PostsViewModel {
-  private postsInteractor: IPostsInteractor;
+  private readonly postsInteractor: IPostsInteractor;
+  private readonly routingService: IRoutingService;
 
   public isLoading: boolean = false;
   public posts: PostModel[] = [];
@@ -14,7 +17,10 @@ export default class PostsViewModel {
   constructor(
     @inject(moduleDomainTypes.postsInteractor)
     postsInteractor: IPostsInteractor,
+    @inject(moduleUITypes.routingService)
+    routingService: IRoutingService,
   ) {
+    this.routingService = routingService;
     this.postsInteractor = postsInteractor;
     makeObservable(this, {
       posts: observable,
@@ -39,5 +45,9 @@ export default class PostsViewModel {
           console.error(reason);
         }),
       );
+  };
+
+  public goBack = () => {
+    this.routingService.back();
   };
 }

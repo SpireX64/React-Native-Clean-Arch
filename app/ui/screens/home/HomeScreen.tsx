@@ -20,11 +20,6 @@ const HomeScreen: React.VFC<HomeScreenProps> = p => (
           size="LG"
           onPress={p.vm.openPostsPress}
         />
-        <Button
-          text="See TODOs list"
-          onPress={p.vm.openTodoPress}
-          style="Primary"
-        />
       </View>
     </Layout>
   </ScreenLayout>

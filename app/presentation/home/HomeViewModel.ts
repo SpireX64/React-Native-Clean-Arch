@@ -18,6 +18,4 @@ export default class HomeViewModel {
   public openPostsPress = () => {
     this.routingService.forward(Routes.Posts);
   };
-
-  public openTodoPress = () => {};
 }
